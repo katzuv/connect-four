@@ -28,6 +28,48 @@ class Board(object):
                 continue
             row[column] = player
             return i
+
+    def __is_winner(self, player, row, column):
+        return self.__is_winner_in_row(player, row, column) \
+               or self.__is_winner_in_column(player, row, column) \
+               or self.__is_winner_in_descending_diagonal(player, row, column) \
+               or self.__is_winner_in_ascending_diagonal(player, row, column)
+
+    def __is_winner_in_row(self, player, row, column):
+        return self.__is_winner_in_sequence(player, self.__rows[row], column)
+
+    def __is_winner_in_column(self, player, row, column):
+        return self.__is_winner_in_sequence(player, [r[column] for r in self.__rows], row)
+
+    def __is_winner_in_descending_diagonal(self, player, row, column):
+        if row >= column:
+            difference = row - column
+            return self.__is_winner_in_sequence(
+                player,
+                [self.__rows[i][i - difference]
+                 for i in xrange(difference, min(self.ROWS, difference + self.COLUMNS))],
+                column)
+        difference = column - row
+        return self.__is_winner_in_sequence(
+            player,
+            [self.__rows[i - difference][i] for i in xrange(difference, min(difference + self.ROWS, self.COLUMNS))],
+            row)
+
+    def __is_winner_in_ascending_diagonal(self, player, row, column):
+        sum = row + column
+        if sum < self.ROWS:
+            return self.__is_winner_in_sequence(player, [self.__rows[sum - i][i] for i in xrange(sum + 1)], column)
+        return self.__is_winner_in_sequence(
+            player,
+            [self.__rows[sum - i][i] for i in xrange(sum - (self.ROWS - 1), min(sum + 1, self.COLUMNS))],
+            column - sum + (self.ROWS - 1))
+
+    @classmethod
+    def __is_winner_in_sequence(cls, player, sequence, index):
+        target_slice = [player] * cls.TARGET
+        return any(sequence[start:start + cls.TARGET] == target_slice
+                   for start in xrange(max(0, index - (cls.TARGET - 1)), index + 1))
+
     @classmethod
     def __raise_if_out_of_bounds(cls, column):
         if not 0 <= column < cls.COLUMNS:
