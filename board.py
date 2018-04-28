@@ -18,14 +18,23 @@ class Board(object):
     def __insert(self, column, player):
         self.__raise_if_column_is_full(column)
         raise NotImplementedError()
+    @classmethod
+    def __raise_if_out_of_bounds(cls, column):
+        if not 0 <= column < cls.COLUMNS:
+            raise ColumnOutOfBoundsError(column)
+
 
     def __raise_if_column_is_full(self, column):
-        raise NotImplementedError()
+        if self.__rows[0][column] != self.EMPTY:
+            raise FullColumnError(column)
 
-    def __is_winner(self, player, row, column):
-        raise NotImplementedError()
-
-
-class FullColumnError(Exception):
+class ColumnOutOfBoundsError(IndexError):
     def __init__(self, column):
-        super(FullColumnError, self).__init__('Column {} is full'.format(column))
+        super(ColumnOutOfBoundsError, self).__init__()
+        self.column = column
+
+
+class FullColumnError(OverflowError):
+    def __init__(self, column):
+        super(FullColumnError, self).__init__()
+        self.column = column
