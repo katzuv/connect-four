@@ -12,6 +12,17 @@ class Board(object):
         '''
         :return: Whether player won the game after this move.
         '''
+        row = self.__insert(column, player)
+        return self.__is_winner(player, row, column)
+
+    def __insert(self, column, player):
+        self.__raise_if_column_is_full(column)
+        raise NotImplementedError()
+
+    def __raise_if_column_is_full(self, column):
+        raise NotImplementedError()
+
+    def __is_winner(self, player, row, column):
         raise NotImplementedError()
 
 
