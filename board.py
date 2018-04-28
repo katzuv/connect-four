@@ -6,7 +6,7 @@ class Board(object):
         return '\n'.join(''.join(row) for row in self.__rows)
 
     def is_full(self):
-        raise NotImplementedError()
+        return all(' ' not in row for row in self.__rows)
 
     def move(self, column, player):
         '''
