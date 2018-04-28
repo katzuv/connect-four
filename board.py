@@ -1,9 +1,9 @@
 class Board(object):
     def __init__(self):
-        raise NotImplementedError()
+        self.__rows = [[' ' for _ in xrange(7)] for _ in xrange(6)]
 
     def __str__(self):
-        raise NotImplementedError()
+        return '\n'.join(''.join(row) for row in self.__rows)
 
     def is_full(self):
         raise NotImplementedError()
