@@ -12,13 +12,14 @@ def main():
             try:
                 column = column_input(player)
                 if board.move(column, player):
+                    print board
                     print_win(player)
                     return
                 break
             except ColumnOutOfBoundsError as error:
-                print "Column {} is not in board".format(error.column)
+                print 'Column {} is not in board'.format(error.column)
             except FullColumnError as error:
-                print "Column {} is full".format(error.column)
+                print 'Column {} is full'.format(error.column)
             except Exception as error:
                 print error
 

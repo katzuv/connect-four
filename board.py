@@ -75,10 +75,10 @@ class Board(object):
         if not 0 <= column < cls.COLUMNS:
             raise ColumnOutOfBoundsError(column)
 
-
     def __raise_if_column_is_full(self, column):
         if self.__rows[0][column] != self.EMPTY:
             raise FullColumnError(column)
+
 
 class ColumnOutOfBoundsError(IndexError):
     def __init__(self, column):
