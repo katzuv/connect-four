@@ -1,12 +1,17 @@
 class Board(object):
+    ROWS = 6
+    COLUMNS = 7
+    EMPTY = ' '
+    TARGET = 4
+
     def __init__(self):
-        self.__rows = [[' ' for _ in xrange(7)] for _ in xrange(6)]
+        self.__rows = [[self.EMPTY for _ in xrange(self.COLUMNS)] for _ in xrange(self.ROWS)]
 
     def __str__(self):
         return '\n'.join(''.join(row) for row in self.__rows)
 
     def is_full(self):
-        return all(' ' not in row for row in self.__rows)
+        return all(self.EMPTY not in row for row in self.__rows)
 
     def move(self, column, player):
         '''
@@ -16,8 +21,13 @@ class Board(object):
         return self.__is_winner(player, row, column)
 
     def __insert(self, column, player):
+        self.__raise_if_out_of_bounds(column)
         self.__raise_if_column_is_full(column)
-        raise NotImplementedError()
+        for i, row in enumerate(reversed(self.__rows)):
+            if row[column] != self.EMPTY:
+                continue
+            row[column] = player
+            return i
     @classmethod
     def __raise_if_out_of_bounds(cls, column):
         if not 0 <= column < cls.COLUMNS:
