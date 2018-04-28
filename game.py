@@ -1,6 +1,6 @@
 from itertools import cycle
 
-from board import Board, FullColumnError
+from board import Board, ColumnOutOfBoundsError, FullColumnError
 
 
 def main():
@@ -15,7 +15,11 @@ def main():
                     print_win(player)
                     return
                 break
-            except (ValueError, FullColumnError) as error:
+            except ColumnOutOfBoundsError as error:
+                print "Column {} is not in board".format(error.column)
+            except FullColumnError as error:
+                print "Column {} is full".format(error.column)
+            except Exception as error:
                 print error
 
         if board.is_full():
@@ -32,7 +36,7 @@ def print_game_over():
 
 
 def column_input(player):
-    return int(raw_input('Player {}, enter a column number between 1 and 7: '.format(player))) - 1
+    return int(raw_input('Player {}, enter a column number between 1 and {}: '.format(player, Board.COLUMNS))) - 1
 
 
 if __name__ == '__main__':
