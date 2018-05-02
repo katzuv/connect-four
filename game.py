@@ -24,6 +24,7 @@ def main():
                 print error
 
         if board.is_full():
+            print board
             print_game_over()
             return
 
