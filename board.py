@@ -15,9 +15,6 @@ class Board(object):
         return all(self.EMPTY not in row for row in self.__rows)
 
     def move(self, column, player):
-        '''
-        :return: Whether player won the game after this move.
-        '''
         row = self.__insert(column, player)
         return self.__is_winner(player, row, column)
 
@@ -83,10 +80,12 @@ class Board(object):
     def __is_winner(self, player, row, column):
         raise NotImplementedError()
 
+
 class ColumnOutOfBoundsError(IndexError):
     def __init__(self, column):
         super(ColumnOutOfBoundsError, self).__init__()
         self.column = column
+
 
 class FullColumnError(Exception):
     def __init__(self, column):
