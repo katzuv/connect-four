@@ -8,7 +8,8 @@ class Board(object):
         self.__rows = [[self.EMPTY for _ in xrange(self.COLUMNS)] for _ in xrange(self.ROWS)]
 
     def __str__(self):
-        return '\n'.join(''.join(row) for row in self.__rows)
+        return '\n'.join('\033[1m' + str(i) + '\033[0;0m' + ' ' + ' '.join(row) for i, row in enumerate(self.__rows, start=1)) + '\n' + \
+        '\033[1m' + '  1 2 3 4 5 6 7' + '\033[0;0m'
 
     def is_full(self):
         return all(self.EMPTY not in row for row in self.__rows)
