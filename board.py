@@ -80,14 +80,15 @@ class Board(object):
         if self.__rows[0][column] != self.EMPTY:
             raise FullColumnError(column)
 
+    def __is_winner(self, player, row, column):
+        raise NotImplementedError()
 
 class ColumnOutOfBoundsError(IndexError):
     def __init__(self, column):
         super(ColumnOutOfBoundsError, self).__init__()
         self.column = column
 
-
-class FullColumnError(OverflowError):
+class FullColumnError(Exception):
     def __init__(self, column):
         super(FullColumnError, self).__init__()
         self.column = column
