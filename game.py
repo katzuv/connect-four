@@ -4,6 +4,12 @@ from board import Board, ColumnOutOfBoundsError, FullColumnError
 
 
 def main():
+    """
+    Main function running the game.
+
+    :except: ColumnOutOfBoundsError, FullColumnError, Exception
+    :return: when the game has ended
+    """
     board = Board()
 
     for player in cycle(['X', 'O']):
@@ -30,14 +36,31 @@ def main():
 
 
 def print_win(player):
+    """
+    Print the winner's sign.
+
+    :param player: the winner
+    :type player: str
+    """
     print 'Player {} won! :)'.format(player)
 
 
 def print_game_over():
+    """
+    Print that the board is full and the game is over.
+    """
     print 'Board is full, tie.'
 
 
 def column_input(player):
+    """
+    Input a column number from player.
+
+    :param player: player to ask the input for
+    :type player: str
+    :return: column number player inputted
+    :rtype: int
+    """
     return int(raw_input('Player {}, enter a column number between 1 and {}: '.format(player, Board.COLUMNS))) - 1
 
 
