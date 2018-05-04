@@ -17,7 +17,7 @@ def main():
                     return
                 break
             except ColumnOutOfBoundsError as error:
-                print 'Column {} is not in board'.format(error.column)
+                print 'Column {} is not in board'.format(error.column + 1)
             except FullColumnError as error:
                 print 'Column {} is full'.format(error.column)
             except Exception as error:
