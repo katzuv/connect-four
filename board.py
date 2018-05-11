@@ -14,9 +14,8 @@ class Board(object):
         :return: a string describing the current board
         :rtype: str
         """
-        return '\n'.join('\033[1m' + str(i) + '\033[0;0m' + ' ' + ' '.join(row) for i, row in
-                         enumerate(self.__rows, start=1)) + '\n' + \
-               '\033[1m' + '  1 2 3 4 5 6 7' + '\033[0;0m'
+        return '{}\n  1 2 3 4 5 6 7'.format('\n'.join(str(i) + ' ' + ' '.join(row) for i, row in
+                                                      enumerate(self.__rows, start=1)))
 
     def is_full(self):
         """
@@ -145,7 +144,7 @@ class Board(object):
     @classmethod
     def __is_winner_in_sequence(cls, sequence, index, player):
         """
-        :param sequence:
+        :param sequence: sequence of tokens
         :type sequence: list
         :param index: index of the latest token in the list
         :param player:  current player
