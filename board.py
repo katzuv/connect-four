@@ -51,7 +51,7 @@ class Board(object):
         """
         self.__raise_if_out_of_bounds(column)
         self.__raise_if_column_is_full(column)
-        for i, row in enumerate(reversed(self.__rows)):
+        for i, row in reversed(list(enumerate(self.__rows))):
             if row[column] != self.EMPTY:
                 continue
             row[column] = player
