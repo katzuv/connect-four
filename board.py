@@ -14,8 +14,7 @@ class Board(object):
         :return: a string describing the current board
         :rtype: str
         """
-        return '{}\n  1 2 3 4 5 6 7'.format('\n'.join(str(i) + ' ' + ' '.join(row) for i, row in
-                                                      enumerate(self.__rows, start=1)))
+        return '\n'.join(' '.join(row) for row in self.__rows)
 
     def is_full(self):
         """

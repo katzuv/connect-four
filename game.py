@@ -13,7 +13,7 @@ def main():
     board = Board()
 
     for player in cycle(['X', 'O']):
-        print board
+        print_board(board)
         while True:
             try:
                 column = column_input(player)
@@ -33,6 +33,17 @@ def main():
             print board
             print_game_over()
             return
+
+
+def print_board(board):
+    """
+    Print the current board.
+
+    :param board: current board
+    :type board: Board
+    """
+    print board
+    print ' '.join(str(column) for column in xrange(1, board.COLUMNS + 1))
 
 
 def print_win(player):
