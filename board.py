@@ -30,7 +30,7 @@ class Board(object):
         :param column: column the player inputted
         :type column: int
         :param player: current player
-        :tyep player: str
+        :type player: str
         :return: whether player won the game
         :rtype: bool
         """
@@ -68,9 +68,9 @@ class Board(object):
         :rtype: bool
         """
         return self.__is_winner_in_row(row, column, player) \
-               or self.__is_winner_in_column(row, column, player) \
-               or self.__is_winner_in_descending_diagonal(row, column, player) \
-               or self.__is_winner_in_ascending_diagonal(row, column, player)
+            or self.__is_winner_in_column(row, column, player) \
+            or self.__is_winner_in_descending_diagonal(row, column, player) \
+            or self.__is_winner_in_ascending_diagonal(row, column, player)
 
     def __is_winner_in_row(self, row, column, player):
         """
@@ -196,7 +196,7 @@ class ColumnOutOfBoundsError(IndexError):
 
 class FullColumnError(Exception):
     """
-    Exception for handling columns numbers fpr columns that are already full.
+    Exception for handling columns numbers for columns that are already full.
     """
 
     def __init__(self, column):
